@@ -20,7 +20,6 @@ public class VisualizationDaoImpl implements VisualizationDao{
 
     private DataSource dataSource;
 
-    @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }

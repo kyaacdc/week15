@@ -91,7 +91,7 @@ public enum EnumSearcher {
     public Set<ProductCard> findInProductDescription(String criteria, List<ProductCard> all){
         set = new LinkedHashSet<>();
         for(ProductCard p: all){
-            String name = p.getProductdescription();
+            String name = p.getProductDescription();
             if(name.equals(criteria))
                 set.add(p);
         }

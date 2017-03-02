@@ -5,32 +5,35 @@ import com.smarthouse.pojo.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/main/resources/app-config.xml")
 public class OrderItemDaoImplTest {
 
+    @Resource
     private OrderItemDao service;
+    @Resource
     private ProductCardDao productCardDao;
+    @Resource
     private CategoryDao categoryDao;
+    @Resource
     private OrderMainDao orderMainDao;
+    @Resource
     private CustomerDao customerDao;
 
     private OrderMain orderMain;
 
     @Before
     public void init() {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("app-config.xml");
-        service = (OrderItemDao) ac.getBean("orderItemDao");
-        productCardDao = (ProductCardDao) ac.getBean("productCardDao");
-        categoryDao = (CategoryDao) ac.getBean("categoryDao");
-        orderMainDao = (OrderMainDao) ac.getBean("orderMainDao");
-        customerDao = (CustomerDao) ac.getBean("customerDao");
         Category category = categoryDao.add(new Category("desc", "name", 0));
         productCardDao.add(new ProductCard("111", "name", 123, 1, 1, 1, "decs", category.getId()));
         Customer customer = customerDao.add(new Customer("anniya@bk.ru", "Yuriy", false, "7585885"));

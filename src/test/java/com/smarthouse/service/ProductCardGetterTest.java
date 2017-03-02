@@ -2,12 +2,12 @@ package com.smarthouse.service;
 
 import com.smarthouse.dao.*;
 import com.smarthouse.pojo.*;
-import com.smarthouse.service.libs.util.Checker;
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -21,44 +21,22 @@ import static org.junit.Assert.assertTrue;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/main/resources/app-config.xml")
 public class ProductCardGetterTest {
 
+    @Resource
     private ProductCardGetter bl;
+    @Resource
     private CategoryDao cdao;
+    @Resource
     private ProductCardDao pdao;
+    @Resource
     private AttributeValueDao avdao;
+    @Resource
     private AttributeNameDao andao;
+    @Resource
     private VisualizationDao vdao;
-
-    @Before
-    public void init(){
-        ApplicationContext ac = new ClassPathXmlApplicationContext("app-config.xml");
-        cdao = (CategoryDao) ac.getBean("categoryDao");
-        pdao = (ProductCardDao) ac.getBean("productCardDao");
-        avdao = (AttributeValueDao) ac.getBean("attributeValueDao");
-        andao = (AttributeNameDao) ac.getBean("attributeNameDao");
-        vdao = (VisualizationDao) ac.getBean("visualizationDao");
-        bl = new ProductCardGetter();
-    }
-
-    @Test
-    public void isProductAvailable() throws Exception {
-        Category category = new Category("desc", "name", 0);
-        category = cdao.add(category);
-
-        ProductCard productCard = new ProductCard("888", "2name", 2222, 34, 45, 4, "xxx", category.getId());
-
-        //Record to DB
-        productCard = pdao.add(productCard);
-        assertTrue(Checker.isProductAvailable(productCard.getSku()));
-        pdao.delete(productCard.getSku());
-        cdao.delete(category.getId());
-    }
-
-    @Test(expected = NoSuchElementException.class)
-    public void isProductAvailableThrownIfNotBelong(){
-        Checker.isProductAvailable("2222");
-    }
 
     @Test
     public void checkCorrectionOfFindAllProductsByCriteria() throws Exception {

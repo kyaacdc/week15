@@ -21,7 +21,6 @@ public class CategoryDaoImpl implements CategoryDao{
 
     private DataSource dataSource;
 
-    @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }

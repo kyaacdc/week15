@@ -17,7 +17,6 @@ public class OrderItemDaoImpl implements OrderItemDao {
 
     private DataSource dataSource;
 
-    @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }

@@ -2,31 +2,23 @@ package com.smarthouse.dao.impl;
 
 import com.smarthouse.dao.CustomerDao;
 import com.smarthouse.pojo.Customer;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/main/resources/app-config.xml")
 public class CustomerDaoImplTest {
 
+    @Resource
     private CustomerDao service;
-
-    @Before
-    public void init() {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("app-config.xml");
-        service = (CustomerDao) ac.getBean("customerDao");
-    }
-
-    @After
-    public void after(){
-        service = null;
-    }
 
     @Test
     public void testSaveRecord(){

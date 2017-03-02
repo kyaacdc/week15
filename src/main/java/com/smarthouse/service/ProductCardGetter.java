@@ -23,12 +23,14 @@ public class ProductCardGetter {
     private AttributeValueDao attributeValueDao;
 
 
-    public ProductCardGetter() {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("app-config.xml");
-        productCardDao = (ProductCardDao) ac.getBean("productCardDao");
-        categoryDao = (CategoryDao) ac.getBean("categoryDao");
-        visualizationDao = (VisualizationDao) ac.getBean("visualizationDao");
-        attributeValueDao = (AttributeValueDao) ac.getBean("attributeValueDao");
+    public ProductCardGetter() {}
+
+    public ProductCardGetter(ProductCardDao productCardDao, CategoryDao categoryDao,
+                             VisualizationDao visualizationDao, AttributeValueDao attributeValueDao) {
+        this.productCardDao = productCardDao;
+        this.categoryDao = categoryDao;
+        this.visualizationDao = visualizationDao;
+        this.attributeValueDao = attributeValueDao;
     }
 
     /**

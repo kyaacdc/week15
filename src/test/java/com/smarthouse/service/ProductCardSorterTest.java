@@ -2,27 +2,24 @@ package com.smarthouse.service;
 
 import com.smarthouse.dao.ProductCardDao;
 import com.smarthouse.pojo.ProductCard;
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 import static com.smarthouse.service.libs.enums.EnumProductSorter.*;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/main/resources/app-config.xml")
 public class ProductCardSorterTest {
 
-        private ProductCardDao pdao;
-
-        private ProductCardSorter bl;
-
-        @Before
-        public void init(){
-            ApplicationContext ac = new ClassPathXmlApplicationContext("app-config.xml");
-            pdao = (ProductCardDao) ac.getBean("productCardDao");
-            bl = new ProductCardSorter();
-        }
+    @Resource
+    private ProductCardDao pdao;
+    @Resource
+    private ProductCardSorter bl;
 
     @Test
     public void sortByPopularity() throws Exception {

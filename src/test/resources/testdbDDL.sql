@@ -52,7 +52,7 @@ CREATE TABLE productcard
   likes INTEGER NOT NULL,
   name VARCHAR(255),
   price INTEGER NOT NULL,
-  productdescription VARCHAR(255),
+  productDescription VARCHAR(255),
   category INTEGER,
   CONSTRAINT fkqb0uvey0cfqaojgi1ycpm6prj FOREIGN KEY (category) REFERENCES category (id)
 );

@@ -18,7 +18,7 @@ public class ProductCardRowMapper implements RowMapper {
             productCard.setLikes(rs1.getInt(4));
             productCard.setName(rs1.getString(5));
             productCard.setPrice(rs1.getInt(6));
-            productCard.setProductdescription(rs1.getString(7));
+            productCard.setProductDescription(rs1.getString(7));
             productCard.setCategoryId(rs1.getInt(8));
 
             return productCard;

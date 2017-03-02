@@ -14,7 +14,6 @@ public class CustomerDaoImpl implements CustomerDao {
 
     private DataSource dataSource;
 
-    @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }

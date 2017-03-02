@@ -5,29 +5,29 @@ import com.smarthouse.pojo.AttributeName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
+import javax.annotation.Resource;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/main/resources/app-config.xml")
 public class AttributeNameDaoImplTest {
 
+    @Resource
     private AttributeNameDao service;
 
     @Before
-    public void init(){
-        ApplicationContext ac = new ClassPathXmlApplicationContext("app-config.xml");
-        service = (AttributeNameDao) ac.getBean("attributeNameDao");
-    }
+    public void init(){}
 
     @After
-    public void after(){
-        service = null;
-    }
+    public void after(){}
 
     @Test
     public void testSaveRecord(){

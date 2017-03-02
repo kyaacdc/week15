@@ -14,7 +14,6 @@ public class ProductCardDaoImpl implements ProductCardDao {
 
     private DataSource dataSource;
 
-    @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -55,7 +54,7 @@ public class ProductCardDaoImpl implements ProductCardDao {
     public ProductCard add(ProductCard productCard) {
         JdbcTemplate insert = new JdbcTemplate(dataSource);
         insert.update("INSERT INTO productcard (SKU, AMOUNT, DISLIKES, LIKES, NAME, PRICE, PRODUCTDESCRIPTION, CATEGORY) VALUES(?,?,?,?,?,?,?,?)",
-                new Object[]{productCard.getSku(), productCard.getAmount(), productCard.getDislikes(), productCard.getLikes(), productCard.getName(), productCard.getPrice(), productCard.getProductdescription(), productCard.getCategoryId()});
+                new Object[]{productCard.getSku(), productCard.getAmount(), productCard.getDislikes(), productCard.getLikes(), productCard.getName(), productCard.getPrice(), productCard.getProductDescription(), productCard.getCategoryId()});
         return get(productCard.getSku());
     }
 
@@ -63,7 +62,7 @@ public class ProductCardDaoImpl implements ProductCardDao {
     public ProductCard update(ProductCard productCard) {
         JdbcTemplate insert = new JdbcTemplate(dataSource);
         insert.update("UPDATE productcard SET AMOUNT = ?, DISLIKES = ?, LIKES = ?, NAME = ?, PRICE = ?, PRODUCTDESCRIPTION = ?, CATEGORY = ? WHERE sku = ?",
-                new Object[]{productCard.getAmount(), productCard.getDislikes(), productCard.getLikes(), productCard.getName(), productCard.getPrice(), productCard.getProductdescription(), productCard.getCategoryId(), productCard.getSku()});
+                new Object[]{productCard.getAmount(), productCard.getDislikes(), productCard.getLikes(), productCard.getName(), productCard.getPrice(), productCard.getProductDescription(), productCard.getCategoryId(), productCard.getSku()});
         return get(productCard.getSku());    }
 
     @Override

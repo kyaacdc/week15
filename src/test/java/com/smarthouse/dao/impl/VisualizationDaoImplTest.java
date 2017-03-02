@@ -9,34 +9,29 @@ import com.smarthouse.pojo.Visualization;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.isA;
 import static org.junit.Assert.assertThat;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/main/resources/app-config.xml")
 public class VisualizationDaoImplTest {
 
+    @Resource
     private VisualizationDao service;
+    @Resource
     private CategoryDao categoryDao;
+    @Resource
     private ProductCardDao productCardDao;
-
-    @Before
-    public void init(){
-        ApplicationContext ac = new ClassPathXmlApplicationContext("app-config.xml");
-        service = (VisualizationDao) ac.getBean("visualizationDao");
-        categoryDao = (CategoryDao) ac.getBean("categoryDao");
-        productCardDao = (ProductCardDao) ac.getBean("productCardDao");
-    }
-
-    @After
-    public void after(){
-        service = null;
-    }
-
 
     @Test
     public void testSaveRecord() {

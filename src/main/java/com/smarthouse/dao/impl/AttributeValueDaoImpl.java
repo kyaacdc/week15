@@ -17,7 +17,6 @@ public class AttributeValueDaoImpl implements AttributeValueDao {
 
     private DataSource dataSource;
 
-    @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }

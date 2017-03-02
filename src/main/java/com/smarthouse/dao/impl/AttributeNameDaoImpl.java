@@ -19,7 +19,6 @@ public class AttributeNameDaoImpl implements AttributeNameDao{
 
     private DataSource dataSource;
 
-    @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }

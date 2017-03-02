@@ -19,21 +19,21 @@ public class ProductCard {
 
     private int dislikes;
 
-    private String productdescription;
+    private String productDescription;
 
     private int categoryId;
 
     public ProductCard() {
     }
 
-    public ProductCard(String sku, String name, int price, int amount, int likes, int dislikes, String productdescription, int categoryId) {
+    public ProductCard(String sku, String name, int price, int amount, int likes, int dislikes, String productDescription, int categoryId) {
         this.sku = sku;
         this.name = name;
         this.price = price;
         this.amount = amount;
         this.likes = likes;
         this.dislikes = dislikes;
-        this.productdescription = productdescription;
+        this.productDescription = productDescription;
         this.categoryId = categoryId;
     }
 
@@ -85,12 +85,12 @@ public class ProductCard {
         this.dislikes = dislikes;
     }
 
-    public String getProductdescription() {
-        return productdescription;
+    public String getProductDescription() {
+        return productDescription;
     }
 
-    public void setProductdescription(String productdescription) {
-        this.productdescription = productdescription;
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
     }
 
     public int getCategoryId() {
