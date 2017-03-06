@@ -1,6 +1,7 @@
 package com.smarthouse.util;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -27,7 +28,7 @@ public class DbCreator {
         this.pathSqlFile = pathSqlFile;
     }
 
-    public void dropCreateDbAndTables() throws SQLException, InterruptedException {
+    public void dropCreateDbAndTables() throws SQLException, InterruptedException, IOException {
         dropDB();
         createDB();
         createTables();
@@ -46,13 +47,17 @@ public class DbCreator {
         }
     }
 
-    public void createTables() throws SQLException {
+    public void createTables() throws SQLException, IOException {
 
         c = DriverManager.getConnection(urlDb, user, psw);
 
         String query = "";
 
-        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(pathSqlFile))){
+        // TODO: 06.03.17  replace it into config
+        AbstractApplicationContext ac = new ClassPathXmlApplicationContext("app-config.xml");
+        String absolutePath = ac.getResource("createTestDb.sql").getFile().getAbsolutePath();
+        
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))){
             String readline;
             while(( readline = bufferedReader.readLine()) !=null){
                 query  = query + readline;
@@ -84,7 +89,7 @@ public class DbCreator {
         }
     }
 
-    public static void main(String[] args) throws SQLException, InterruptedException {
+    public static void main(String[] args) throws SQLException, InterruptedException, IOException {
         ApplicationContext ac = new ClassPathXmlApplicationContext("app-config.xml");
         DbCreator dbCreator = (DbCreator) ac.getBean("testDbCreator");
         dbCreator.dropCreateDbAndTables();

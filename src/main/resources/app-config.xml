@@ -22,7 +22,7 @@
         <constructor-arg value="${jdbc.username}"/>
         <constructor-arg value="${jdbc.password}"/>
         <!-- TODO replace with classpath path-->
-        <constructor-arg value="/home/kya/new/week15/src/main/resources/createTestDb.sql"/>
+        <constructor-arg value="file:/resources/createTestDb.sql"/>
     </bean>
 
     <!-- JdbcTemplate -->

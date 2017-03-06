@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class CategoryDaoTest {
     private CategoryDao service;
 
     @BeforeClass
-    public static void dropCreateDb() throws SQLException, InterruptedException {
+    public static void dropCreateDb() throws SQLException, InterruptedException, IOException {
         ApplicationContext ac = new ClassPathXmlApplicationContext("app-config.xml");
         DbCreator dbCreator = (DbCreator) ac.getBean("dbCreator");
         dbCreator.dropCreateDbAndTables();
