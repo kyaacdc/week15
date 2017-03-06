@@ -1,14 +1,11 @@
 package com.smarthouse.pojo;
 
-import com.smarthouse.pojo.validators.Name;
-
 public class Category {
 
     private int id;
 
     private String description;
 
-    @Name
     private String name;
 
     private int categoryId;

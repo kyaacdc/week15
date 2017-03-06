@@ -1,18 +1,13 @@
 package com.smarthouse.pojo;
 
-import com.smarthouse.pojo.validators.Name;
-import com.smarthouse.pojo.validators.Sku;
-
 public class AttributeValue {
 
     private int id;
 
     private String value;
 
-    @Name
     private String attributeName;
 
-    @Sku
     private String productCardSku;
 
     public AttributeValue() {

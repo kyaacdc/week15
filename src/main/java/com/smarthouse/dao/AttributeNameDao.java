@@ -1,18 +1,35 @@
 package com.smarthouse.dao;
 
+import com.smarthouse.dao.rowMapper.AttributeNameRowMapper;
 import com.smarthouse.pojo.AttributeName;
-
 import java.util.List;
 
-public interface AttributeNameDao {
+public class AttributeNameDao extends MajorDao{
 
-    AttributeName get(String name);
+    public AttributeName get(String name) {
+        return getJdbcTemplate()
+                .queryForObject("SELECT * FROM attributename WHERE name = ?",
+                        new Object[]{name},
+                        new AttributeNameRowMapper());
+    }
 
-    List<AttributeName> getAll();
+    public List<AttributeName> getAll() {
+        return getJdbcTemplate()
+                .query("SELECT * FROM attributename",
+                        new AttributeNameRowMapper());
+    }
 
-    AttributeName add(AttributeName attributeName);
+    public AttributeName add(AttributeName attributeName) {
+        getJdbcTemplate().update("INSERT INTO attributename (NAME) VALUES(?)",
+                attributeName.getName());
+        return get(attributeName.getName());
+    }
 
-    void delete(String name);
+    public void delete(String name) {
+        getJdbcTemplate().update("DELETE FROM attributename WHERE NAME = ?", name);
+    }
 
-    void deleteAll();
+    public void deleteAll() {
+        getJdbcTemplate().update("DELETE FROM attributename");
+    }
 }

@@ -1,7 +1,5 @@
 package com.smarthouse.pojo;
 
-import com.smarthouse.pojo.validators.Sku;
-
 public class Visualization {
 
     private int id;
@@ -10,7 +8,6 @@ public class Visualization {
 
     private String url;
 
-    @Sku
     private String productCardSku;
 
     public Visualization() {

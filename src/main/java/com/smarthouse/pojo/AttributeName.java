@@ -1,10 +1,7 @@
 package com.smarthouse.pojo;
 
-import com.smarthouse.pojo.validators.Name;
-
 public class AttributeName {
 
-    @Name
     private String name;
 
     public AttributeName() {

@@ -7,9 +7,9 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OrderItemRowMapper implements RowMapper {
+public class OrderItemRowMapper implements RowMapper<OrderItem> {
     @Override
-    public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public OrderItem mapRow(ResultSet rs, int rowNum) throws SQLException {
         ResultSetExtractor<OrderItem> extractor = rs1 -> {
             OrderItem orderItem = new OrderItem();
             orderItem.setId(rs1.getInt(1));

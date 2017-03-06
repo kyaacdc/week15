@@ -15,32 +15,43 @@
         <property name="password" value="${jdbc.password}"/>
     </bean>
 
-    <bean id="shopManager" class="com.smarthouse.service.ShopManager">
-        <constructor-arg ref="productCardDao"/>
-        <constructor-arg ref="customerDao"/>
-        <constructor-arg ref="orderMainDao"/>
-        <constructor-arg ref="orderItemDao"/>
+    <!-- Creator database for tests -->
+    <bean id="dbCreator" class="com.smarthouse.util.DbCreator">
+        <constructor-arg value="${jdbc.urlPostgres}"/>
+        <constructor-arg value="${jdbc.url}"/>
+        <constructor-arg value="${jdbc.username}"/>
+        <constructor-arg value="${jdbc.password}"/>
+        <!-- TODO replace with classpath path-->
+        <constructor-arg value="/home/kya/new/week15/src/main/resources/createTestDb.sql"/>
     </bean>
 
-    <bean id="productCardGetter" class="com.smarthouse.service.ProductCardGetter">
-        <constructor-arg ref="productCardDao"/>
-        <constructor-arg ref="categoryDao"/>
-        <constructor-arg ref="visualizationDao"/>
-        <constructor-arg ref="attributeValueDao"/>
-    </bean>
-
-    <bean id="productCardSorter" class="com.smarthouse.service.ProductCardSorter"/>
-
-    <bean id="productCardDao" class="com.smarthouse.dao.impl.ProductCardDaoImpl">
+    <!-- JdbcTemplate -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="categoryDao" class="com.smarthouse.dao.impl.CategoryDaoImpl" parent="productCardDao"/>
-    <bean id="visualizationDao" class="com.smarthouse.dao.impl.VisualizationDaoImpl" parent="productCardDao"/>
-    <bean id="attributeNameDao" class="com.smarthouse.dao.impl.AttributeNameDaoImpl" parent="productCardDao"/>
-    <bean id="attributeValueDao" class="com.smarthouse.dao.impl.AttributeValueDaoImpl" parent="productCardDao"/>
-    <bean id="customerDao" class="com.smarthouse.dao.impl.CustomerDaoImpl" parent="productCardDao"/>
-    <bean id="orderMainDao" class="com.smarthouse.dao.impl.OrderMainDaoImpl" parent="productCardDao"/>
-    <bean id="orderItemDao" class="com.smarthouse.dao.impl.OrderItemDaoImpl" parent="productCardDao"/>
+    <!-- Major Dao class -->
+    <bean id="majorDao" class="com.smarthouse.dao.MajorDao">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    <bean id="productCardDao" class="com.smarthouse.dao.ProductCardDao" parent="majorDao"/>
+    <bean id="categoryDao" class="com.smarthouse.dao.CategoryDao" parent="majorDao"/>
+    <bean id="visualizationDao" class="com.smarthouse.dao.VisualizationDao" parent="majorDao"/>
+    <bean id="attributeNameDao" class="com.smarthouse.dao.AttributeNameDao" parent="majorDao"/>
+    <bean id="attributeValueDao" class="com.smarthouse.dao.AttributeValueDao" parent="majorDao"/>
+    <bean id="customerDao" class="com.smarthouse.dao.CustomerDao" parent="majorDao"/>
+    <bean id="orderMainDao" class="com.smarthouse.dao.OrderMainDao" parent="majorDao"/>
+    <bean id="orderItemDao" class="com.smarthouse.dao.OrderItemDao" parent="majorDao"/>
+
+    <!-- ShopManager facade -->
+    <bean id="shopManager" class="com.smarthouse.service.ShopManager">
+        <constructor-arg ref="productCardDao"/>
+        <constructor-arg ref="categoryDao"/>
+        <constructor-arg ref="customerDao"/>
+        <constructor-arg ref="orderMainDao"/>
+        <constructor-arg ref="orderItemDao"/>
+        <constructor-arg ref="visualizationDao"/>
+        <constructor-arg ref="attributeValueDao"/>
+    </bean>
 
 </beans>

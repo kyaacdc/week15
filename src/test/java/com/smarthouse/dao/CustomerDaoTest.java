@@ -1,13 +1,17 @@
-package com.smarthouse.dao.impl;
+package com.smarthouse.dao;
 
-import com.smarthouse.dao.CustomerDao;
 import com.smarthouse.pojo.Customer;
+import com.smarthouse.util.DbCreator;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
@@ -15,10 +19,17 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/resources/app-config.xml")
-public class CustomerDaoImplTest {
+public class CustomerDaoTest {
 
     @Resource
     private CustomerDao service;
+
+    @BeforeClass
+    public static void dropCreateDb() throws SQLException, InterruptedException {
+        ApplicationContext ac = new ClassPathXmlApplicationContext("app-config.xml");
+        DbCreator dbCreator = (DbCreator) ac.getBean("dbCreator");
+        dbCreator.dropCreateDbAndTables();
+    }
 
     @Test
     public void testSaveRecord(){

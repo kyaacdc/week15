@@ -7,9 +7,9 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CustomerRowMapper implements RowMapper {
+public class CustomerRowMapper implements RowMapper<Customer> {
     @Override
-    public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
         ResultSetExtractor<Customer> extractor = rs1 -> {
             Customer customer = new Customer();
             customer.setEmail(rs1.getString(1));

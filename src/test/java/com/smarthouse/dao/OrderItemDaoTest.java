@@ -1,15 +1,16 @@
-package com.smarthouse.dao.impl;
+package com.smarthouse.dao;
 
-import com.smarthouse.dao.*;
 import com.smarthouse.pojo.*;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import com.smarthouse.util.DbCreator;
+import org.junit.*;
 import org.junit.runner.RunWith;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
@@ -17,7 +18,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/resources/app-config.xml")
-public class OrderItemDaoImplTest {
+public class OrderItemDaoTest {
 
     @Resource
     private OrderItemDao service;
@@ -32,12 +33,20 @@ public class OrderItemDaoImplTest {
 
     private OrderMain orderMain;
 
+    @BeforeClass
+    public static void dropCreateDb() throws SQLException, InterruptedException {
+        ApplicationContext ac = new ClassPathXmlApplicationContext("app-config.xml");
+        DbCreator dbCreator = (DbCreator) ac.getBean("dbCreator");
+        dbCreator.dropCreateDbAndTables();
+    }
+
+
     @Before
     public void init() {
         Category category = categoryDao.add(new Category("desc", "name", 0));
         productCardDao.add(new ProductCard("111", "name", 123, 1, 1, 1, "decs", category.getId()));
         Customer customer = customerDao.add(new Customer("anniya@bk.ru", "Yuriy", false, "7585885"));
-        orderMain = orderMainDao.add(new OrderMain("OrderAddress", 1, customer.getEmail()));
+        orderMain = orderMainDao.add(new OrderMain("OrderAddress", 1, customer));
     }
 
     @After

@@ -8,15 +8,15 @@ public class OrderMain {
 
     private int status;
 
-    private String customerEmail;
+    private Customer customer;
 
     public OrderMain() {
     }
 
-    public OrderMain(String address, int status, String customerEmail) {
+    public OrderMain(String address, int status, Customer customer) {
         this.address = address;
         this.status = status;
-        this.customerEmail = customerEmail;
+        this.customer = customer;
     }
 
     public int getOrderId() {
@@ -43,11 +43,11 @@ public class OrderMain {
         this.status = status;
     }
 
-    public String getCustomerEmail() {
-        return customerEmail;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

@@ -1,21 +1,19 @@
-package com.smarthouse.dao.impl;
+package com.smarthouse.dao;
 
-import com.smarthouse.dao.AttributeNameDao;
-import com.smarthouse.dao.AttributeValueDao;
-import com.smarthouse.dao.CategoryDao;
-import com.smarthouse.dao.ProductCardDao;
 import com.smarthouse.pojo.AttributeName;
 import com.smarthouse.pojo.AttributeValue;
 import com.smarthouse.pojo.Category;
 import com.smarthouse.pojo.ProductCard;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import com.smarthouse.util.DbCreator;
+import org.junit.*;
 import org.junit.runner.RunWith;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
@@ -33,6 +31,13 @@ public class AttributeValueDaoTest {
     private ProductCardDao productCardDao;
     @Resource
     private CategoryDao categoryDao;
+
+    @BeforeClass
+    public static void dropCreateDb() throws SQLException, InterruptedException {
+        ApplicationContext ac = new ClassPathXmlApplicationContext("app-config.xml");
+        DbCreator dbCreator = (DbCreator) ac.getBean("dbCreator");
+        dbCreator.dropCreateDbAndTables();
+    }
 
     @Before
     public void init(){

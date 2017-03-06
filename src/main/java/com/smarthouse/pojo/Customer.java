@@ -1,18 +1,13 @@
 package com.smarthouse.pojo;
 
-import com.smarthouse.pojo.validators.Name;
-import com.smarthouse.pojo.validators.Phone;
-
 public class Customer {
 
     private String email;
 
-    @Name
     private String name;
 
     private boolean subscribe;
 
-    @Phone
     private String phone;
 
     public Customer() {

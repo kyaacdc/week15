@@ -7,9 +7,9 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AttributeNameRowMapper implements RowMapper {
+public class AttributeNameRowMapper implements RowMapper<AttributeName> {
     @Override
-    public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public AttributeName mapRow(ResultSet rs, int rowNum) throws SQLException {
         ResultSetExtractor<AttributeName> extractor = rs1 -> {
             AttributeName attributeName = new AttributeName();
             attributeName.setName(rs1.getString(1));

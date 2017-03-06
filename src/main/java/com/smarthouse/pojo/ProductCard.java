@@ -1,14 +1,9 @@
 package com.smarthouse.pojo;
 
-import com.smarthouse.pojo.validators.Name;
-import com.smarthouse.pojo.validators.Sku;
-
 public class ProductCard {
 
-    @Sku
     private String sku;
 
-    @Name
     private String name;
 
     private int price;

@@ -3,13 +3,12 @@ package com.smarthouse.dao.rowMapper;
 import com.smarthouse.pojo.AttributeValue;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AttributeValueRowMapper  implements RowMapper {
+public class AttributeValueRowMapper  implements RowMapper<AttributeValue> {
     @Override
-    public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public AttributeValue mapRow(ResultSet rs, int rowNum) throws SQLException {
         ResultSetExtractor<AttributeValue> extractor = rs1 -> {
             AttributeValue attributeValue = new AttributeValue();
             attributeValue.setId(rs1.getInt(1));

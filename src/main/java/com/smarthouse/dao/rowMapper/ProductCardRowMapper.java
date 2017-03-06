@@ -7,9 +7,9 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ProductCardRowMapper implements RowMapper {
+public class ProductCardRowMapper implements RowMapper<ProductCard> {
     @Override
-    public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public ProductCard mapRow(ResultSet rs, int rowNum) throws SQLException {
         ResultSetExtractor<ProductCard> extractor = rs1 -> {
             ProductCard productCard = new ProductCard();
             productCard.setSku(rs1.getString(1));
